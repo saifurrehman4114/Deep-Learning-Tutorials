@@ -1,0 +1,54 @@
+# importing libraries
+
+from tensorflow.keras.preprocessing.image import load_img 
+
+from tensorflow.keras.preprocessing.image import img_to_array
+
+from tensorflow.keras.applications.resnet50 import ResNet50
+
+from tensorflow.keras.preprocessing import image
+
+from tensorflow.keras.applications.resnet50 import preprocess_input
+
+from tensorflow.keras.applications.resnet50 import decode_predictions
+
+# calling model 
+mymodel = ResNet50()
+
+# load img 
+
+img = load_img('please put name and extention of the img  ',target_size = (224, 224) )
+
+# img to array
+
+
+
+array_img = img_to_array(img)
+
+
+
+
+
+# reshaping
+
+array_img = array_img.reshape((1,224,224,3))
+
+
+#making it in a suitable format for Resnet 50
+
+array_img = preprocess_input(array_img)
+
+
+
+
+#prediction 
+prediction = mymodel.predict(array_img)
+
+
+decoding_img =  decode_predictions(prediction)
+
+
+decoding_img = decoding_img [0][0]
+
+
+print("This is a :" + decoding_img[1])
